@@ -21,13 +21,8 @@ def get_users():
 @users_bp.route("/", methods=["POST"])
 def post_user():
     data = request.get_json()
-
-    print("🔥 DATA RECEBIDA:", data)
-
-    return {
-        "success": True,
-        "data": data
-    }, 200
+    response, status = criar_usuario(data)
+    return jsonify(response), status
 
 
 @users_bp.route("/<int:id>", methods=["PATCH"])
