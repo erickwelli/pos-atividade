@@ -4,6 +4,7 @@ from app.controllers.parking_controller import (
     criar_parking,
     listar_parkings
 )
+from app.controllers.inspection_controller import listar_inspections_por_parking
 
 from app.controllers.parkingspot_controller import (
     listar_spots_por_parking
@@ -25,4 +26,9 @@ def get_parkings():
 @parkings_bp.route("/<int:parking_id>/spots", methods=["GET"])
 def get_parking_spots(parking_id):
     response, status = listar_spots_por_parking(parking_id)
+    return jsonify(response), status
+
+@parkings_bp.route("/<int:parking_id>/inspections", methods=["GET"])
+def get_parking_inspections(parking_id):
+    response, status = listar_inspections_por_parking(parking_id)
     return jsonify(response), status

@@ -35,3 +35,10 @@ def atualizar_spot(id, data):
     db.session.commit()
 
     return success_response(spot_schema.dump(spot))
+
+def listar_spots_por_parking(parking_id):
+    parking = Parking.query.get_or_404(parking_id)
+
+    spots = parking.spots
+
+    return success_response(spots_schema.dump(spots))

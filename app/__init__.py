@@ -6,6 +6,10 @@ from .config import Config
 from .extensions import db, ma, migrate
 from .routes.messages import messages_bp
 from .routes.users import users_bp
+from .routes.parkings import parkings_bp
+from .routes.parkingspots import spots_bp
+from .routes.inspections import inspections_bp
+from .routes.professionals import professionals_bp
 
 
 def create_app():
@@ -18,9 +22,14 @@ def create_app():
     ma.init_app(app)
 
     from .models import message, user  # noqa: F401
+    from .models import parking, parkingspot, inspection, professional
 
     app.register_blueprint(messages_bp, url_prefix="/messages")
     app.register_blueprint(users_bp, url_prefix="/users")
+    app.register_blueprint(parkings_bp, url_prefix="/parkings")
+    app.register_blueprint(spots_bp, url_prefix="/spots")
+    app.register_blueprint(inspections_bp, url_prefix="/inspections")
+    app.register_blueprint(professionals_bp, url_prefix="/professionals")
 
     @app.errorhandler(ValidationError)
     def handle_validation_error(err):
